@@ -3,8 +3,11 @@ import Notes from "../Notes";
 import Dropdown from "../Dropdown";
 import Button from "../Button";
 import Textarea from "../Textarea";
+import Targets from "../Targets";
+import Breathe from "../Breathe";
 
 let dayName = ["Mon", "Tue", "Wed", "Thu", "Fri", "W-end"];
+let smileys = ["😊", "😐", "😔"];
 
 function App() {
   return (
@@ -19,13 +22,31 @@ function App() {
           <Dropdown></Dropdown>
           <div id="day-button-container">
             {dayName.map(function (eachDay) {
-              return <Button days={eachDay}></Button>;
+              return <Button text={eachDay}></Button>;
             })}
           </div>
-          <Textarea />
+          <p>Notes:</p>
+          <Textarea rows={40} />
           <p>How did today go?</p>
-          <SmileyButtons />
+          <div id="smiley-button-container">
+            {smileys.map(function (eachSmiley) {
+              return <Button text={eachSmiley}></Button>;
+            })}
+          </div>
+          <p>Reflections:</p>
+          <Textarea></Textarea>
+          <Button text={"Update"} />
         </Notes>
+        <Targets>
+          <h2>Targets</h2>
+
+          <Textarea />
+
+          <Button text={"Add Target"} />
+        </Targets>
+        <Breathe>
+          <p> hello</p>
+        </Breathe>
       </div>
     </div>
   );

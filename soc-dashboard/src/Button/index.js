@@ -1,5 +1,5 @@
-function Button({ days }) {
-  return <button>{days}</button>;
+function Button({ text }) {
+  return <button>{text}</button>;
 }
 
 export default Button;

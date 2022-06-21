@@ -1,11 +1,9 @@
-import React from 'react'
+import React from "react";
 
-export default function Textarea() {
+export default function Textarea({ rows }) {
   return (
     <div>
-      <textarea>
-        
-      </textarea>
+      <textarea rows={rows}></textarea>
     </div>
-  )
+  );
 }

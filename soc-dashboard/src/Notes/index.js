@@ -1,5 +1,9 @@
 function Notes(props) {
-  return <div id="notes-container">{props.children}</div>;
+  return (
+    <div id="notes-container" class="containers">
+      {props.children}
+    </div>
+  );
 }
 
 export default Notes;
