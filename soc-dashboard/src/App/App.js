@@ -2,6 +2,8 @@ import "./App.css";
 import Notes from "../Notes";
 import Dropdown from "../Dropdown";
 import Button from "../Button";
+import Textarea from "../Textarea";
+
 let dayName = ["Mon", "Tue", "Wed", "Thu", "Fri", "W-end"];
 
 function App() {
@@ -20,6 +22,9 @@ function App() {
               return <Button days={eachDay}></Button>;
             })}
           </div>
+          <Textarea />
+          <p>How did today go?</p>
+          <SmileyButtons />
         </Notes>
       </div>
     </div>
