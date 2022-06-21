@@ -1,9 +1,9 @@
 import React from "react";
 
-function Dropdown() {
+function Dropdown({ onChange }) {
   return (
     <React.Fragment>
-      <select name="weeks" id="week">
+      <select name="weeks" id="week" onChange={onChange}>
         <option value="week1">Week 1</option>
         <option value="week2">Week 2</option>
         <option value="week3">Week 3</option>

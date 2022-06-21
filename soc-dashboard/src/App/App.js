@@ -1,4 +1,5 @@
 import "./App.css";
+import { useState } from "react";
 import Notes from "../Notes";
 import Dropdown from "../Dropdown";
 import Button from "../Button";
@@ -10,6 +11,31 @@ let dayName = ["Mon", "Tue", "Wed", "Thu", "Fri", "W-end"];
 let smileys = ["😊", "😐", "😔"];
 
 function App() {
+  const [week, setWeek] = useState("week1");
+  const [day, setDay] = useState("Mon");
+  const [notesText, setNotesText] = useState("");
+
+  async function fetchNotes() {
+    let response = await fetch(
+      `http://localhost:3001/notes/?week=${week}&day=${day}`
+    );
+    let data = await response.json();
+
+    setNotesText(data.payload[0].post);
+  }
+
+  function chooseWeek(e) {
+    let chosenWeek = e.target.value;
+    setWeek(chosenWeek);
+    fetchNotes();
+  }
+  function chooseDay(e) {
+    let chosenDay = e.target.value;
+    setDay(chosenDay);
+    fetchNotes();
+  }
+
+  console.log("Week is now:" + week + "Day is now:" + day);
   return (
     <div className="App">
       <div id="header">
@@ -19,14 +45,26 @@ function App() {
       <div id="body-container">
         <Notes>
           <h2>Notes</h2>
-          <Dropdown></Dropdown>
+          <Dropdown onChange={chooseWeek}></Dropdown>
           <div id="day-button-container">
             {dayName.map(function (eachDay) {
-              return <Button text={eachDay}></Button>;
+              return (
+                <Button
+                  onClick={chooseDay}
+                  text={eachDay}
+                  value={eachDay}
+                ></Button>
+              );
             })}
           </div>
           <p>Notes:</p>
-          <Textarea rows={40} />
+          <Textarea
+            rows={40}
+            notesText={notesText}
+            onChange={function (e) {
+              setNotesText(e.target.value);
+            }}
+          />
           <p>How did today go?</p>
           <div id="smiley-button-container">
             {smileys.map(function (eachSmiley) {

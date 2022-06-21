@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function Textarea({ rows }) {
+export default function Textarea({ rows, onChange, notesText }) {
   return (
     <div>
-      <textarea rows={rows}></textarea>
+      <textarea onChange={onChange} rows={rows} value={notesText}></textarea>
     </div>
   );
 }
