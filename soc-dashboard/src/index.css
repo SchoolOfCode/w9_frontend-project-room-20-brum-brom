@@ -6,6 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #EFEFEF;
+ 
 }
 
 code {
@@ -19,6 +20,25 @@ code {
   
   
 }
+h1 {
+  font-family: "Arvo";
+  color:#5C5C5C;
+}
+
+h2 {
+  font-family: "Arvo";
+  color:#5C5C5C;
+  text-align: left;
+  padding-left: 30px;
+  padding-bottom: 30px;
+  font-size:30px;
+  text-decoration: underline;
+  text-decoration-color: #32A3DB ;
+  text-decoration-thickness: 6px;
+  text-underline-offset: 6px;
+  
+}
+
 
 #body-container {
   display:flex;
@@ -27,13 +47,16 @@ code {
   height: 1200px;
   flex-wrap: wrap;
   align-content: center;
+  
 
   
 }
 #notes-container {
   height: 1040px;
+  
   width: 40%;
   margin-right: 20px;
+  margin-left: 20px;
 }
 
 #targets-container {
@@ -41,15 +64,54 @@ code {
   width: 40%;
   margin-bottom: 40px;
   margin-left: 20px;
+  margin-right: 20px;
 }
 #breathe-container {
   height: 333px;
   width: 40%;
   margin-left: 20px;
+  margin-right: 20px;
  
 }
 
 textarea {
   width: 90%;
   resize:none;
+}
+
+#header-container {
+  margin: 50px;
+  display:flex;
+  justify-content: center;
+  flex-direction: row;
+  
+  
+  align-content: center;
+ 
+
+}
+#logo-container {
+  width:40%;
+  
+  display:flex;
+
+
+  margin-left: 20px;
+  margin-right: 20px;
+
+
+  
+
+}
+
+#quote-container {
+  width:40%;
+
+  text-align: right;
+  
+  margin-left: 20px;
+  margin-right: 20px;
+
+ 
+ 
 }

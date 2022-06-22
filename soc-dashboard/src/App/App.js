@@ -1,19 +1,26 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Notes from "../Notes";
 import Dropdown from "../Dropdown";
 import Button from "../Button";
 import Textarea from "../Textarea";
 import Targets from "../Targets";
 import Breathe from "../Breathe";
+import logo from "../logo.png";
 
 let dayName = ["Mon", "Tue", "Wed", "Thu", "Fri", "W-end"];
-let smileys = ["😊", "😐", "😔"];
+let smileys = [
+  { emoji: "😊", id: "happy" },
+  { emoji: "😐", id: "indifferent" },
+  { emoji: "😔", id: "sad" },
+];
 
 function App() {
   const [week, setWeek] = useState("week1");
   const [day, setDay] = useState("Mon");
   const [notesText, setNotesText] = useState("");
+  const [emoji, setEmoji] = useState("indifferent");
+  const [reflection, setReflection] = useState("");
 
   async function fetchNotes() {
     let response = await fetch(
@@ -24,23 +31,38 @@ function App() {
     setNotesText(data.payload[0].post);
   }
 
+  useEffect(
+    function () {
+      fetchNotes();
+    },
+    [week, day]
+  );
+
   function chooseWeek(e) {
     let chosenWeek = e.target.value;
     setWeek(chosenWeek);
-    fetchNotes();
+    //fetchNotes();
   }
   function chooseDay(e) {
     let chosenDay = e.target.value;
     setDay(chosenDay);
-    fetchNotes();
+    //fetchNotes();
   }
 
   console.log("Week is now:" + week + "Day is now:" + day);
   return (
     <div className="App">
-      <div id="header">
-        <h1>SOC LOGO - DASHBOARD</h1>
-        <p>"inspirational quote"</p>
+      <div id="header-container">
+        <div id="logo-container">
+          <img src={logo} height="100" />
+          <h1>DASHBOARD</h1>
+        </div>
+        <div id="quote-container">
+          <p>
+            "Everybody in this country should learn to program a computer
+            because it teaches you how to think." - Steve Jobs
+          </p>
+        </div>
       </div>
       <div id="body-container">
         <Notes>
@@ -63,12 +85,21 @@ function App() {
             notesText={notesText}
             onChange={function (e) {
               setNotesText(e.target.value);
+              console.log(notesText);
             }}
           />
           <p>How did today go?</p>
           <div id="smiley-button-container">
             {smileys.map(function (eachSmiley) {
-              return <Button text={eachSmiley}></Button>;
+              return (
+                <Button
+                  text={eachSmiley.emoji}
+                  id={eachSmiley.id}
+                  onClick={function (e) {
+                    setEmoji(e.target.id);
+                  }}
+                ></Button>
+              );
             })}
           </div>
           <p>Reflections:</p>
@@ -83,6 +114,7 @@ function App() {
           <Button text={"Add Target"} />
         </Targets>
         <Breathe>
+          <h2>Breathe</h2>
           <p> hello</p>
         </Breathe>
       </div>
