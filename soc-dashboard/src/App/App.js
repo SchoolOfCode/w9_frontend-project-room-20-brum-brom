@@ -29,6 +29,8 @@ function App() {
   const [listToDo, setlistToDo] = useState([]);
   const [editTargetText, setEditTargetText] = useState("");
 
+  //const [updateNotesObject, setUpdateNotesObject] = useState({});
+
   function handleChange(event) {
     setTargetText(event.target.value);
     console.log(targetText);
@@ -113,6 +115,9 @@ function App() {
     //fetchNotes();
   }
 
+  // Package into object DONE
+  // send object to back end
+
   function updateNotes(e) {
     e.preventDefault();
     const updateNotesObject = {
@@ -122,17 +127,25 @@ function App() {
       emoji: emoji,
       reflections: reflection,
     };
-    console.log(updateNotesObject);
+
+    console.log("This is the packaged object: ", updateNotesObject);
 
     fetch(`http://localhost:3001/notes/?week=${week}&day=${day}`, {
       method: "PATCH",
       body: JSON.stringify(updateNotesObject),
-      header: { "Content-type": "application/json" },
+      headers: { "Content-type": "application/json" },
     })
       .then((response) => response.json())
       .then((json) => console.log(json));
   }
-
+  /*
+  useEffect(
+    function () {
+      patchNotes();
+    },
+    [updateNotesObject]
+  );
+*/
   // console.log("Week is now:" + week + "Day is now:" + day);
   return (
     <div className="App">
@@ -185,7 +198,7 @@ function App() {
           </div>
           <p>Reflections:</p>
           <Textarea
-            reflection={reflection}
+            notesText={reflection}
             onChange={function (e) {
               setReflection(e.target.value);
               console.log(reflection);
