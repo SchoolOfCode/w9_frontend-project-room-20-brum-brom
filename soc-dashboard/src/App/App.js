@@ -7,7 +7,8 @@ import Textarea from "../Textarea";
 import Targets from "../Targets";
 import Breathe from "../Breathe";
 import logo from "../logo.png";
-import Quotes from '../Quote'
+import Quotes from "../Quote";
+import List from "../List";
 
 let dayName = ["Mon", "Tue", "Wed", "Thu", "Fri", "W-end"];
 let smileys = [
@@ -22,7 +23,68 @@ function App() {
   const [notesText, setNotesText] = useState("");
   const [emoji, setEmoji] = useState("indifferent");
   const [reflection, setReflection] = useState("");
-  const[quote, setQuote] = useState("")
+  const [quote, setQuote] = useState("");
+
+  const [targetText, setTargetText] = useState("");
+  const [listToDo, setlistToDo] = useState([]);
+  const [editTargetText, setEditTargetText] = useState("");
+
+  function handleChange(event) {
+    setTargetText(event.target.value);
+    console.log(targetText);
+  }
+
+  function addToList() {
+    if (targetText === "") {
+      return;
+    }
+    setlistToDo([
+      ...listToDo,
+      {
+        id: Math.floor(Math.random() * 100000),
+        text: targetText,
+        complete: false,
+        edit: false,
+      },
+    ]);
+    console.log(listToDo);
+    setTargetText("");
+  }
+
+  function deleteList(id) {
+    setlistToDo([...listToDo].filter((e) => e.id !== id));
+  }
+
+  function toggleComplete(id) {
+    setlistToDo(
+      listToDo.map((e) => {
+        if (e.id === id) {
+          e.complete = !e.complete;
+          return e;
+        } else {
+          return e;
+        }
+      })
+    );
+  }
+
+  function toggleEdit(id) {
+    setlistToDo(
+      listToDo.map((e) => {
+        if (e.id === id) {
+          e.edit = !e.edit;
+          e.text = editTargetText;
+          return e;
+        } else {
+          return e;
+        }
+      })
+    );
+  }
+
+  function handleEdit(event) {
+    setEditTargetText(event.target.value);
+  }
 
   async function fetchNotes() {
     let response = await fetch(
@@ -31,10 +93,7 @@ function App() {
     let data = await response.json();
 
     setNotesText(data.payload[0].post);
-    
   }
-
-  
 
   useEffect(
     function () {
@@ -56,23 +115,25 @@ function App() {
 
   function updateNotes(e) {
     e.preventDefault();
-    const updateNotesObject ={ "day":day, "week":week, 
-    "post":notesText, "emoji":emoji, "reflections":reflection}
-    console.log(updateNotesObject)
-  
-  fetch(`http://localhost:3001/notes/?week=${week}&day=${day}`,{
-      method:'PATCH',
-      body:JSON.stringify(updateNotesObject),
-      header:{ "Content-type":"application/json" }
-     
+    const updateNotesObject = {
+      day: day,
+      week: week,
+      post: notesText,
+      emoji: emoji,
+      reflections: reflection,
+    };
+    console.log(updateNotesObject);
+
+    fetch(`http://localhost:3001/notes/?week=${week}&day=${day}`, {
+      method: "PATCH",
+      body: JSON.stringify(updateNotesObject),
+      header: { "Content-type": "application/json" },
     })
-    .then((response)=>response.json())
-    .then((json)=>console.log(json))
-
+      .then((response) => response.json())
+      .then((json) => console.log(json));
   }
- 
 
-  console.log("Week is now:" + week + "Day is now:" + day);
+  // console.log("Week is now:" + week + "Day is now:" + day);
   return (
     <div className="App">
       <div id="header-container">
@@ -81,7 +142,7 @@ function App() {
           <h1>DASHBOARD</h1>
         </div>
         <div id="quote-container">
-          <Quotes quote={quote}/>
+          <Quotes quote={quote} />
         </div>
       </div>
       <div id="body-container">
@@ -123,18 +184,29 @@ function App() {
             })}
           </div>
           <p>Reflections:</p>
-          <Textarea reflection={reflection} onChange={function (e) {
+          <Textarea
+            reflection={reflection}
+            onChange={function (e) {
               setReflection(e.target.value);
               console.log(reflection);
-            }}></Textarea>
-          <Button text={"Update"}  onClick={updateNotes}/>
+            }}
+          ></Textarea>
+          <Button text={"Update"} onClick={updateNotes} />
         </Notes>
         <Targets>
           <h2>Targets</h2>
 
-          <Textarea />
+          <Textarea onChange={handleChange} notesText={targetText} />
 
-          <Button text={"Add Target"}/>
+          <Button text={"Add Target"} onClick={addToList} />
+          <List
+            targetText={targetText}
+            listToDo={listToDo}
+            deleteList={deleteList}
+            toggleComplete={toggleComplete}
+            toggleEdit={toggleEdit}
+            handleEdit={handleEdit}
+          ></List>
         </Targets>
         <Breathe>
           <h2>Breathe</h2>
