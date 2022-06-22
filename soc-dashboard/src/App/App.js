@@ -7,6 +7,7 @@ import Textarea from "../Textarea";
 import Targets from "../Targets";
 import Breathe from "../Breathe";
 import logo from "../logo.png";
+import Quotes from '../Quote'
 
 let dayName = ["Mon", "Tue", "Wed", "Thu", "Fri", "W-end"];
 let smileys = [
@@ -16,11 +17,12 @@ let smileys = [
 ];
 
 function App() {
-  const [week, setWeek] = useState("week1");
+  const [week, setWeek] = useState("Week1");
   const [day, setDay] = useState("Mon");
   const [notesText, setNotesText] = useState("");
   const [emoji, setEmoji] = useState("indifferent");
   const [reflection, setReflection] = useState("");
+  const[quote, setQuote] = useState("")
 
   async function fetchNotes() {
     let response = await fetch(
@@ -29,7 +31,10 @@ function App() {
     let data = await response.json();
 
     setNotesText(data.payload[0].post);
+    
   }
+
+  
 
   useEffect(
     function () {
@@ -49,6 +54,24 @@ function App() {
     //fetchNotes();
   }
 
+  function updateNotes(e) {
+    e.preventDefault();
+    const updateNotesObject ={ "day":day, "week":week, 
+    "post":notesText, "emoji":emoji, "reflections":reflection}
+    console.log(updateNotesObject)
+  
+  fetch(`http://localhost:3001/notes/?week=${week}&day=${day}`,{
+      method:'PATCH',
+      body:JSON.stringify(updateNotesObject),
+      header:{ "Content-type":"application/json" }
+     
+    })
+    .then((response)=>response.json())
+    .then((json)=>console.log(json))
+
+  }
+ 
+
   console.log("Week is now:" + week + "Day is now:" + day);
   return (
     <div className="App">
@@ -58,10 +81,7 @@ function App() {
           <h1>DASHBOARD</h1>
         </div>
         <div id="quote-container">
-          <p>
-            "Everybody in this country should learn to program a computer
-            because it teaches you how to think." - Steve Jobs
-          </p>
+          <Quotes quote={quote}/>
         </div>
       </div>
       <div id="body-container">
@@ -103,15 +123,18 @@ function App() {
             })}
           </div>
           <p>Reflections:</p>
-          <Textarea></Textarea>
-          <Button text={"Update"} />
+          <Textarea reflection={reflection} onChange={function (e) {
+              setReflection(e.target.value);
+              console.log(reflection);
+            }}></Textarea>
+          <Button text={"Update"}  onClick={updateNotes}/>
         </Notes>
         <Targets>
           <h2>Targets</h2>
 
           <Textarea />
 
-          <Button text={"Add Target"} />
+          <Button text={"Add Target"}/>
         </Targets>
         <Breathe>
           <h2>Breathe</h2>
