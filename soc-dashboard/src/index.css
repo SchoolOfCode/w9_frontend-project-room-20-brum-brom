@@ -21,7 +21,7 @@ code {
   
 }
 h1 {
-  font-family: "Arvo";
+  font-family: "Arvo", Arial, Helvetica, sans-serif;
   color:#5C5C5C;
 }
 
@@ -158,5 +158,30 @@ select {
   justify-content: center;
   width: 90%;
   align-content: center;
+}
+
+.white-button {
+  background-color: white;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 10px 10px;
+  border: none;
+}
+
+.done {
+  text-decoration: line-through;
+  list-style:inside;
+
+ 
+  
+}
+
+li {
+  text-align: left;
+  display:flex;
+  align-items: center;
+
+  
+ 
 }
 

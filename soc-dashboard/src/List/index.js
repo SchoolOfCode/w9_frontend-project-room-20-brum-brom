@@ -25,12 +25,13 @@ function List({
             <input type="text" id="edit-input" onChange={handleEdit}></input>
 
             <button
+              className="white-button"
               id="edit-button"
               onClick={() => {
                 toggleEdit(item.id);
               }}
             >
-              Update
+              💾
             </button>
           </div>
         );

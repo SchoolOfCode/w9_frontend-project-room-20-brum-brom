@@ -12,11 +12,17 @@ function ListItem({
         listToDo.find((o) => o.id === id).complete ? "done" : "not-done"
       }
     >
-      {text}
+      • {text}
       <div id="icons-check">
-        <button onClick={deleteList}>DELETE</button>
-        <button onClick={toggleEdit}>EDIT</button>
-        <button onClick={toggleComplete}>DONE</button>
+        <button className="white-button" onClick={deleteList}>
+          ❌
+        </button>
+        <button className="white-button" onClick={toggleEdit}>
+          ✏️
+        </button>
+        <button className="white-button" onClick={toggleComplete}>
+          ✅
+        </button>
       </div>
     </li>
   );

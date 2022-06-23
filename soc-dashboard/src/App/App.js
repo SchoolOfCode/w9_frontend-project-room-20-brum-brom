@@ -50,7 +50,7 @@ function App() {
   const [quote, setQuote] = useState("");
 
   const [targetText, setTargetText] = useState("");
-  const [listToDo, setlistToDo] = useState([]);
+  const [listToDo, setlistToDo] = useState(getList);
   const [editTargetText, setEditTargetText] = useState("");
 
   //const [updateNotesObject, setUpdateNotesObject] = useState({});
@@ -290,7 +290,7 @@ function App() {
         </Notes>
         <Targets>
           <h2>Targets</h2>
-
+          <p>Use this form to keep track of your targets and goals:</p>
           <Textarea onChange={handleChange} notesText={targetText} />
 
           <Button
