@@ -26,7 +26,7 @@ function App() {
   const [quote, setQuote] = useState("");
 
   const [targetText, setTargetText] = useState("");
-  const [listToDo, setlistToDo] = useState([]);
+  const [listToDo, setlistToDo] = useState(getList);
   const [editTargetText, setEditTargetText] = useState("");
 
   //const [updateNotesObject, setUpdateNotesObject] = useState({});
@@ -61,6 +61,23 @@ function App() {
     })
       .then((response) => response.json())
       .then((json) => console.log(json));
+  }
+
+  useEffect(function localGet() {
+    const localTodos = JSON.parse(localStorage.getItem("listtodo"));
+    setlistToDo(localTodos);
+  }, []);
+
+  useEffect(() => {
+    if (listToDo) {
+      localStorage.setItem("listtodo", JSON.stringify(listToDo));
+    }
+  }, [listToDo]);
+
+  function getList() {
+    const localTodos = JSON.parse(localStorage.getItem("listtodo"));
+    // setlistToDo(localTodos);
+    return localTodos;
   }
 
   function deleteList(id) {
