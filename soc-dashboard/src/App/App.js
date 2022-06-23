@@ -47,11 +47,13 @@ function App() {
   const [notesText, setNotesText] = useState("");
   const [emoji, setEmoji] = useState("indifferent");
   const [reflection, setReflection] = useState("");
-  const [quote, setQuote] = useState("");
+ /*  const [quote, setQuote] = useState(""); */
 
   const [targetText, setTargetText] = useState("");
   const [listToDo, setlistToDo] = useState(getList);
   const [editTargetText, setEditTargetText] = useState("");
+
+  const [code, setCode ]= useState("")
 
   //const [updateNotesObject, setUpdateNotesObject] = useState({});
 
@@ -210,6 +212,23 @@ function App() {
   );
 */
   // console.log("Week is now:" + week + "Day is now:" + day);
+
+
+  const numberArr = [1,2,3,4]
+  const ranNum =numberArr[Math.floor(Math.random()*numberArr.length)]
+  async function fetchCode() {
+     let response = await fetch(
+       `http://localhost:3001/code/${ranNum}`
+     );
+     let data = await response.json();
+     console.log(data)
+     setCode(data)
+    }
+    
+
+
+
+
   return (
     <div className="App">
       <div id="header-container">
@@ -314,6 +333,7 @@ function App() {
             suggestion:
           </p>
         </Breathe>
+<p>{code.title}</p>
       </div>
     </div>
   );
