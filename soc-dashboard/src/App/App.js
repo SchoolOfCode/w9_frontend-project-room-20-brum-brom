@@ -27,10 +27,12 @@ const randomQuotes = quotes[Math.floor(Math.random() * quotes.length)];
 
 const videos = [
   "https://www.youtube.com/embed/j7rKKpwdXNE",
-  "https://www.youtube.com/embed/tybOi4hjZFQ",
+  "https://www.youtube.com/embed/itZMM5gCboo",
   "https://www.youtube.com/embed/inpok4MKVLM",
   "https://www.youtube.com/embed/JUP_YdYyfQw",
   "https://www.youtube.com/embed/mj2RGYpknzA",
+  "https://www.youtube.com/embed/M-8FvC3GD8c",
+  "https://www.youtube.com/embed/1Ck4mdSr0yU",
 ];
 const randomVideo = videos[Math.floor(Math.random() * videos.length)];
 
@@ -47,13 +49,13 @@ function App() {
   const [notesText, setNotesText] = useState("");
   const [emoji, setEmoji] = useState("indifferent");
   const [reflection, setReflection] = useState("");
- /*  const [quote, setQuote] = useState(""); */
+  /*  const [quote, setQuote] = useState(""); */
 
   const [targetText, setTargetText] = useState("");
   const [listToDo, setlistToDo] = useState(getList);
   const [editTargetText, setEditTargetText] = useState("");
 
-  const [code, setCode ]= useState("")
+  const [code, setCode] = useState("");
 
   //const [updateNotesObject, setUpdateNotesObject] = useState({});
 
@@ -204,31 +206,26 @@ function App() {
       .then((json) => console.log(json));
   }
   /*
-  useEffect(
-    function () {
-      patchNotes();
-    },
-    [updateNotesObject]
-  );
+  
 */
   // console.log("Week is now:" + week + "Day is now:" + day);
-
-
-  const numberArr = [1,2,3,4]
-  const ranNum =numberArr[Math.floor(Math.random()*numberArr.length)]
+  /*
   async function fetchCode() {
-     let response = await fetch(
-       `http://localhost:3001/code/${ranNum}`
-     );
-     let data = await response.json();
-     console.log(data)
-     setCode(data)
-    }
-    
+    const numberArr = [1, 2, 3, 4];
+    const ranNum = numberArr[Math.floor(Math.random() * numberArr.length)];
+    console.log(ranNum);
+    let response = await fetch(`http://localhost:3001/code/${ranNum}`);
+    let data = await response.json();
 
+    setCode(data);
+  }
 
+  useEffect(function () {
+    fetchCode();
+  }, []);
+  console.log(code);
 
-
+  */
   return (
     <div className="App">
       <div id="header-container">
@@ -333,7 +330,6 @@ function App() {
             suggestion:
           </p>
         </Breathe>
-<p>{code.title}</p>
       </div>
     </div>
   );
