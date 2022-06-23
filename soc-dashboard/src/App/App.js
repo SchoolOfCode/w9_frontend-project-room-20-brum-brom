@@ -43,7 +43,7 @@ function App() {
     setlistToDo([
       ...listToDo,
       {
-        id: Math.floor(Math.random() * 100000),
+        id: Math.floor(Math.random() * 10000000),
         text: targetText,
         complete: false,
         edit: false,
@@ -51,6 +51,16 @@ function App() {
     ]);
     console.log(listToDo);
     setTargetText("");
+  }
+
+  function updateTodoListDB() {
+    fetch(`http://localhost:3001/todo/1`, {
+      method: "PUT",
+      body: JSON.stringify(listToDo),
+      headers: { "Content-type": "application/json" },
+    })
+      .then((response) => response.json())
+      .then((json) => console.log(json));
   }
 
   function deleteList(id) {
@@ -106,6 +116,10 @@ function App() {
     },
     [week, day]
   );
+
+  useEffect(function () {
+    updateTodoListDB();
+  }, []);
 
   function chooseWeek(e) {
     let chosenWeek = e.target.value;
