@@ -26,7 +26,7 @@ function App() {
   const [quote, setQuote] = useState("");
 
   const [targetText, setTargetText] = useState("");
-  const [listToDo, setlistToDo] = useState(getList);
+  const [listToDo, setlistToDo] = useState([]);
   const [editTargetText, setEditTargetText] = useState("");
 
   //const [updateNotesObject, setUpdateNotesObject] = useState({});
@@ -52,7 +52,7 @@ function App() {
     console.log(listToDo);
     setTargetText("");
   }
-
+  /*
   function updateTodoListDB() {
     fetch(`http://localhost:3001/todo/1`, {
       method: "PUT",
@@ -62,6 +62,7 @@ function App() {
       .then((response) => response.json())
       .then((json) => console.log(json));
   }
+  */
 
   useEffect(function localGet() {
     const localTodos = JSON.parse(localStorage.getItem("listtodo"));
@@ -76,8 +77,12 @@ function App() {
 
   function getList() {
     const localTodos = JSON.parse(localStorage.getItem("listtodo"));
-    // setlistToDo(localTodos);
-    return localTodos;
+    if (localTodos === undefined) {
+      return [];
+    } else {
+      // setlistToDo(localTodos);
+      return localTodos;
+    }
   }
 
   function deleteList(id) {
@@ -133,11 +138,11 @@ function App() {
     },
     [week, day]
   );
-
+  /*
   useEffect(function () {
     updateTodoListDB();
   }, []);
-
+*/
   function chooseWeek(e) {
     let chosenWeek = e.target.value;
     setWeek(chosenWeek);
@@ -185,7 +190,7 @@ function App() {
     <div className="App">
       <div id="header-container">
         <div id="logo-container">
-          <img src={logo} height="100" />
+          <img src={logo} alt="School of Code Logo" height="100" />
           <h1>DASHBOARD</h1>
         </div>
         <div id="quote-container">
