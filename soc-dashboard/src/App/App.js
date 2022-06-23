@@ -95,6 +95,9 @@ function App() {
     let data = await response.json();
 
     setNotesText(data.payload[0].post);
+    setEmoji(data.payload[0].emoji);
+
+    setReflection(data.payload[0].reflections);
   }
 
   useEffect(
@@ -155,7 +158,7 @@ function App() {
           <h1>DASHBOARD</h1>
         </div>
         <div id="quote-container">
-          <Quotes quote={quote} />
+          <Quotes quote={"Quote goes here"} />
         </div>
       </div>
       <div id="body-container">
@@ -164,8 +167,15 @@ function App() {
           <Dropdown onChange={chooseWeek}></Dropdown>
           <div id="day-button-container">
             {dayName.map(function (eachDay) {
+              let colourClass;
+              if (eachDay === day) {
+                colourClass = "highlighted";
+              } else {
+                colourClass = "unhighlighted";
+              }
               return (
                 <Button
+                  className={colourClass}
                   onClick={chooseDay}
                   text={eachDay}
                   value={eachDay}
@@ -185,8 +195,15 @@ function App() {
           <p>How did today go?</p>
           <div id="smiley-button-container">
             {smileys.map(function (eachSmiley) {
+              let colourClass;
+              if (eachSmiley.id === emoji) {
+                colourClass = "highlighted";
+              } else {
+                colourClass = "unhighlighted";
+              }
               return (
                 <Button
+                  className={colourClass}
                   text={eachSmiley.emoji}
                   id={eachSmiley.id}
                   onClick={function (e) {
@@ -198,20 +215,29 @@ function App() {
           </div>
           <p>Reflections:</p>
           <Textarea
+            rows={4}
             notesText={reflection}
             onChange={function (e) {
               setReflection(e.target.value);
               console.log(reflection);
             }}
           ></Textarea>
-          <Button text={"Update"} onClick={updateNotes} />
+          <Button
+            text={"Update"}
+            className={"highlighted"}
+            onClick={updateNotes}
+          />
         </Notes>
         <Targets>
           <h2>Targets</h2>
 
           <Textarea onChange={handleChange} notesText={targetText} />
 
-          <Button text={"Add Target"} onClick={addToList} />
+          <Button
+            text={"Add Target"}
+            onClick={addToList}
+            className={"highlighted"}
+          />
           <List
             targetText={targetText}
             listToDo={listToDo}

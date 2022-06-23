@@ -1,6 +1,6 @@
-function Button({ text, onClick, value, id }) {
+function Button({ text, onClick, value, id, className }) {
   return (
-    <button onClick={onClick} value={value} id={id}>
+    <button onClick={onClick} value={value} id={id} className={className}>
       {text}
     </button>
   );

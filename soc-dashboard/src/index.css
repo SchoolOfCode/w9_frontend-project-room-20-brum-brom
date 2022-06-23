@@ -42,17 +42,19 @@ h2 {
 
 #body-container {
   display:flex;
-  justify-content: center;
+ 
+ 
   flex-direction: column;
-  height: 1200px;
+  height: 1400px;
   flex-wrap: wrap;
   align-content: center;
+  align-items:flex-start;
   
 
   
 }
 #notes-container {
-  height: 1040px;
+  height: 1360px;
   
   width: 40%;
   margin-right: 20px;
@@ -60,14 +62,14 @@ h2 {
 }
 
 #targets-container {
-  height: 666px;
+  height: 776px;
   width: 40%;
   margin-bottom: 40px;
   margin-left: 20px;
   margin-right: 20px;
 }
 #breathe-container {
-  height: 333px;
+  height: 543px;
   width: 40%;
   margin-left: 20px;
   margin-right: 20px;
@@ -77,6 +79,9 @@ h2 {
 textarea {
   width: 90%;
   resize:none;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
 }
 
 #header-container {
@@ -115,3 +120,43 @@ textarea {
  
  
 }
+
+.highlighted {
+  background-color:#32A3DB;
+  color:white;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 10px 10px;
+  border: none;
+  
+}
+.unhighlighted {
+  background-color:#EFEFEF;
+  color: #5C5C5C;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 10px 10px;
+  border: none;
+}
+
+#day-button-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+button {
+  font-size: 15px;
+}
+
+select {
+  background-color:#32A3DB;
+  color:white;
+  padding: 10px;}
+
+#video-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  align-content: center;
+}
+
