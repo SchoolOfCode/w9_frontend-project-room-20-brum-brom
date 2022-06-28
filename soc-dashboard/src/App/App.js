@@ -12,17 +12,54 @@ import Quotes from "../Quote";
 import List from "../List";
 
 const quotes = [
-  `"The beautiful thing about learning is nobody can take it away from you." - B.B. King`,
-  `"If you don't like something, change it. If you can't change it, change your attitude." - Maya Angelou`,
-  `"Learning never exhausts the mind." ― Leonardo da Vinci`,
-  `"Wisdom… comes not from age, but from education and learning." ― Anton Chekhov`,
-  `On Love of Learning: "I have no special talent. I am only passionately curious." - Einstein`,
-  ` "The more I read, the more I acquire, the more certain I am that I know nothing." ― Voltaire`,
-  `"For the things we have to learn before we can do them, we learn by doing them." ― Aristotle`,
-  `"We learn from failure, not from success!" - Bram Stoker`,
-  `"A man who asks is a fool for five minutes. A man who never asks is a fool for life." - Chinese Proverb`,
-  `"You don't learn to walk by following rules. You learn by doing, and by falling over." - Richard Branson`,
-  `"Learn continually- there's always one more thing to learn!" - Steve Jobs`,
+  {
+    quote: `"The beautiful thing about learning is nobody can take it away from you."`,
+    author: "- B.B. King",
+  },
+  {
+    quote: `"If you don't like something, change it. If you can't change it, change your attitude."`,
+    author: "- Maya Angelou",
+  },
+  {
+    quote: `"Learning never exhausts the mind."`,
+    author: "― Leonardo da Vinci",
+  },
+  {
+    quote: `"Wisdom… comes not from age, but from education and learning."`,
+    author: "― Anton Chekhov",
+  },
+  {
+    quote: `On Love of Learning: "I have no special talent. I am only passionately curious."`,
+    author: `- Einstein`,
+  },
+  {
+    quote: `"The more I read, the more I acquire, the more certain I am that I know nothing."`,
+    author: `― Voltaire`,
+  },
+  {
+    quote: `"For the things we have to learn before we can do them, we learn by doing them."`,
+    author: `― Aristotle`,
+  },
+  {
+    quote: `"We learn from failure, not from success!"`,
+    author: `- Bram Stoker`,
+  },
+  {
+    quote: `"A man who asks is a fool for five minutes. A man who never asks is a fool for life."`,
+    author: `- Chinese Proverb`,
+  },
+  {
+    quote: `"You don't learn to walk by following rules. You learn by doing, and by falling over."`,
+    author: `- Richard Branson`,
+  },
+  {
+    quote: `"Learn continually- there's always one more thing to learn!"`,
+    author: `- Steve Jobs`,
+  },
+  {
+    quote: `"Top tip: try putting grapes on pizza"`,
+    author: `- Chris Meah`,
+  },
 ];
 const randomQuotes = quotes[Math.floor(Math.random() * quotes.length)];
 
@@ -194,7 +231,7 @@ function App() {
           <h1>DASHBOARD</h1>
         </div>
         <div id="quote-container">
-          <Quotes />
+          <Quotes quote={randomQuotes} />
         </div>
       </div>
       <div id="body-container">
@@ -221,7 +258,7 @@ function App() {
           </div>
           <p>Notes:</p>
           <Textarea
-            rows={40}
+            rows={36}
             notesText={notesText}
             onChange={function (e) {
               setNotesText(e.target.value);
