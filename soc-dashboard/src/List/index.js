@@ -1,3 +1,5 @@
+import React from "react"
+
 import ListItem from "../ListItems";
 
 function List({
@@ -23,7 +25,7 @@ function List({
         ) : (
           <div key={item.id}>
             <input type="text" id="edit-input" onChange={handleEdit}></input>
-
+            
             <button
               className="white-button"
               id="edit-button"
@@ -31,8 +33,9 @@ function List({
                 toggleEdit(item.id);
               }}
             >
-              💾
+           <span role="img" aria-label="Floppy disk emoji">💾</span>
             </button>
+            
           </div>
         );
       })}

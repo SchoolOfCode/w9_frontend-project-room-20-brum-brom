@@ -1,3 +1,4 @@
+import React from "react"
 import "./App.css";
 import { useState, useEffect } from "react";
 import Notes from "../Notes";
@@ -49,15 +50,11 @@ function App() {
   const [notesText, setNotesText] = useState("");
   const [emoji, setEmoji] = useState("indifferent");
   const [reflection, setReflection] = useState("");
-  /*  const [quote, setQuote] = useState(""); */
 
   const [targetText, setTargetText] = useState("");
   const [listToDo, setlistToDo] = useState(getList);
   const [editTargetText, setEditTargetText] = useState("");
 
-  const [code, setCode] = useState("");
-
-  //const [updateNotesObject, setUpdateNotesObject] = useState({});
 
   function handleChange(event) {
     setTargetText(event.target.value);
@@ -80,17 +77,7 @@ function App() {
     console.log(listToDo);
     setTargetText("");
   }
-  /*
-  function updateTodoListDB() {
-    fetch(`http://localhost:3001/todo/1`, {
-      method: "PUT",
-      body: JSON.stringify(listToDo),
-      headers: { "Content-type": "application/json" },
-    })
-      .then((response) => response.json())
-      .then((json) => console.log(json));
-  }
-  */
+
 
   useEffect(function localGet() {
     const localTodos = JSON.parse(localStorage.getItem("listtodo"));
@@ -108,7 +95,6 @@ function App() {
     if (localTodos === undefined) {
       return [];
     } else {
-      // setlistToDo(localTodos);
       return localTodos;
     }
   }
@@ -166,20 +152,14 @@ function App() {
     },
     [week, day]
   );
-  /*
-  useEffect(function () {
-    updateTodoListDB();
-  }, []);
-*/
+  
   function chooseWeek(e) {
     let chosenWeek = e.target.value;
     setWeek(chosenWeek);
-    //fetchNotes();
   }
   function chooseDay(e) {
     let chosenDay = e.target.value;
     setDay(chosenDay);
-    //fetchNotes();
   }
 
   // Package into object DONE
@@ -205,27 +185,7 @@ function App() {
       .then((response) => response.json())
       .then((json) => console.log(json));
   }
-  /*
-  
-*/
-  // console.log("Week is now:" + week + "Day is now:" + day);
-  /*
-  async function fetchCode() {
-    const numberArr = [1, 2, 3, 4];
-    const ranNum = numberArr[Math.floor(Math.random() * numberArr.length)];
-    console.log(ranNum);
-    let response = await fetch(`http://localhost:3001/code/${ranNum}`);
-    let data = await response.json();
-
-    setCode(data);
-  }
-
-  useEffect(function () {
-    fetchCode();
-  }, []);
-  console.log(code);
-
-  */
+ 
   return (
     <div className="App">
       <div id="header-container">
@@ -234,7 +194,7 @@ function App() {
           <h1>DASHBOARD</h1>
         </div>
         <div id="quote-container">
-          <Quotes quote={randomQuotes} />
+          <Quotes />
         </div>
       </div>
       <div id="body-container">
