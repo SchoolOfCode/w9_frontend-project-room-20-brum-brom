@@ -8,6 +8,7 @@ function List({
   toggleComplete,
   toggleEdit,
   handleEdit,
+  editTargetText
 }) {
   return (
     <ul>
@@ -24,7 +25,8 @@ function List({
           ></ListItem>
         ) : (
           <div key={item.id}>
-            <input type="text" id="edit-input" onChange={handleEdit}></input>
+            {console.log(item.text)}
+            <input type="text" id="edit-input" onChange={handleEdit} defaultValue={editTargetText}></input>
             
             <button
               className="white-button"

@@ -158,7 +158,10 @@ function App() {
       listToDo.map((e) => {
         if (e.id === id) {
           e.edit = !e.edit;
-          e.text = editTargetText;
+          setEditTargetText(e.text)
+          
+          e.text = editTargetText
+          
           return e;
         } else {
           return e;
@@ -318,6 +321,7 @@ function App() {
             toggleComplete={toggleComplete}
             toggleEdit={toggleEdit}
             handleEdit={handleEdit}
+            editTargetText={editTargetText}
           ></List>
         </Targets>
         <Breathe src={randomVideo}>
